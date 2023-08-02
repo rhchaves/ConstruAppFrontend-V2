@@ -3,7 +3,7 @@
 </template>
 
 <script lang="ts">
-import { Todo, Meta } from 'components/models';
+import { Todo, Meta } from '../common/models';
 import { defineComponent, ref } from 'vue';
 
 export default defineComponent({

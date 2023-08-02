@@ -21,8 +21,8 @@
 
 <script lang="ts">
 import { defineComponent, ref } from 'vue';
-import HeaderComponent from 'components/HeaderComponent.vue';
-import FooterComponent from 'components/FooterComponent.vue';
+import HeaderComponent from '../common/components/HeaderComponent.vue';
+import FooterComponent from '../common/components/FooterComponent.vue';
 
 export default defineComponent({
   name: 'MainLayout',

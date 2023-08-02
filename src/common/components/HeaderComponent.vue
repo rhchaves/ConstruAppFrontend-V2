@@ -28,7 +28,7 @@
             label="O que você procura?"
             dense
           >
-            <q-btn flat>
+            <q-btn @click="searchFilter(search)" flat>
               <q-icon name="search" />
             </q-btn>
           </q-input>
@@ -91,25 +91,25 @@
           <div class="q-ml-xl"></div>
         </div>
       </q-toolbar>
-      <CategoriesComponent></CategoriesComponent>
+      <!-- <CategoriesComponent></CategoriesComponent> -->
     </q-header>
   </div>
 </template>
 
 <script lang="ts">
 import { defineComponent } from 'vue';
-import CategoriesComponent from 'components/CategoriesComponent.vue';
+// import CategoriesComponent from '../components/CategoriesComponent.vue';
 
 export default defineComponent({
   name: 'HeaderComponent',
 
   components: {
-    CategoriesComponent,
+    // CategoriesComponent,
   },
 
   data() {
     return {
-      urlLogo: 'logo-contruApp-v1.png',
+      urlLogo: 'logo-contruApp-v2.png',
       search: '',
       quantityCart: 0,
     };
@@ -118,7 +118,7 @@ export default defineComponent({
   setup() {
     return {
       redirectLogo() {
-        console.log('teste');
+        console.log('Clicou no logo');
 
         // router.addRoute({})
         // router.push('/');
@@ -147,6 +147,10 @@ export default defineComponent({
         //     this.listAllProducts();
         //     this.resetCategoryProduct();
         // }
+      },
+
+      searchFilter(itemSearch: string) {
+        console.log('Clicou em filtrar:', itemSearch);
       },
     };
   },

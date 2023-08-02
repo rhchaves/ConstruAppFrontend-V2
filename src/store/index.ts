@@ -7,23 +7,23 @@ import {
   useStore as vuexUseStore,
 } from 'vuex'
 
-// import example from './module-example'
+import administratorModule from 'src/modules/administrator/store';
+import ClientModule from 'src/modules/client/store';
+import loginModule from 'src/modules/login/store';
+import mainModule from 'src/modules/main/store';
+import productModule from 'src/modules/product/store';
+import sellerModule from 'src/modules/seller/store';
+import shoppingCartModule from 'src/modules/shopping-cart/store';
 // import { ExampleStateInterface } from './module-example/state';
 
-/*
- * If not building with SSR mode, you can
- * directly export the Store instantiation;
- *
- * The function below can be async too; either use
- * async/await or return a Promise which resolves
- * with the Store instance.
- */
-
 export interface StateInterface {
-  // Define your own store structure, using submodules if needed
-  // example: ExampleStateInterface;
-  // Declared as unknown to avoid linting issue. Best to strongly type as per the line above.
-  example: unknown
+  administrator: typeof administratorModule;
+  client: typeof ClientModule;
+  login: typeof loginModule;
+  main: typeof mainModule;
+  product: typeof productModule;
+  seller: typeof sellerModule;
+  shoppingCart: typeof shoppingCartModule;
 }
 
 // provide typings for `this.$store`
@@ -46,7 +46,13 @@ export const storeKey: InjectionKey<VuexStore<StateInterface>> = Symbol('vuex-ke
 export default store(function (/* { ssrContext } */) {
   const Store = createStore<StateInterface>({
     modules: {
-      // example
+      administrator: administratorModule,
+      client: ClientModule,
+      login: loginModule,
+      main: mainModule,
+      product: productModule,
+      seller: sellerModule,
+      shoppingCart: shoppingCartModule,
     },
 
     // enable strict mode (adds overhead!)

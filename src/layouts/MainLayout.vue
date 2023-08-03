@@ -1,12 +1,8 @@
 <template>
-  <q-layout view="lHh Lpr lFf">
+  <q-layout view="hHh Lpr fFf">
+
     <div style="margin: 0 auto; max-width: 1920px">
-      <!-- <HeaderComponent
-          :visibleSearchField="true"
-          :visibleMenu="true"
-          :visibleLogin="true"
-        /> -->
-      <HeaderComponent></HeaderComponent>
+      <HeaderComponent />
     </div>
 
     <!-- Conteúdo principal da página -->

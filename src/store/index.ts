@@ -8,7 +8,8 @@ import {
 } from 'vuex'
 
 import administratorModule from 'src/modules/administrator/store';
-import ClientModule from 'src/modules/client/store';
+import commonStorageModule from './commonStore';
+import clientModule from 'src/modules/client/store';
 import loginModule from 'src/modules/login/store';
 import mainModule from 'src/modules/main/store';
 import productModule from 'src/modules/product/store';
@@ -18,7 +19,8 @@ import shoppingCartModule from 'src/modules/shopping-cart/store';
 
 export interface StateInterface {
   administrator: typeof administratorModule;
-  client: typeof ClientModule;
+  client: typeof clientModule;
+  commonStorage: typeof commonStorageModule;
   login: typeof loginModule;
   main: typeof mainModule;
   product: typeof productModule;
@@ -47,7 +49,8 @@ export default store(function (/* { ssrContext } */) {
   const Store = createStore<StateInterface>({
     modules: {
       administrator: administratorModule,
-      client: ClientModule,
+      client: clientModule,
+      commonStorage: commonStorageModule,
       login: loginModule,
       main: mainModule,
       product: productModule,

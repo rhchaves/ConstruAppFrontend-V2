@@ -1,13 +1,14 @@
 <template>
   <q-page class="row justify-center">
-    <div class="items-center">
+    <section class="row justify-center q-mt-xl" style="max-width: 1300px; max-height: 750px">
+
       <h4>Conteúdo da Página Principal</h4>
       {{ getListProducts }}
       <LoadingComponent
         :visible="getLoading"
       />
       <q-btn class="btnAmber" label="Sair" @click="logout()"></q-btn>
-    </div>
+    </section>
   </q-page>
 </template>
 

@@ -1,12 +1,14 @@
 <template>
-  <div class="btnAmber row justify-center" style="height: 53px">
-    <q-btn
-      v-for="category in listCategories"
-      :key="category.id"
-      class="btnAmber categories"
-      :label="category.label"
-      @click="filterCategories(category)"
-    />
+  <div>
+    <div class="btnAmber q-pa-xs row justify-center">
+      <q-btn
+        v-for="category in listCategories"
+        :key="category.id"
+        class="btnAmber categories"
+        :label="category.label"
+        @click="filterCategories(category)"
+      />
+    </div>
   </div>
 </template>
 

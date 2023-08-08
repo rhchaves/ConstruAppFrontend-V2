@@ -1,9 +1,9 @@
-export interface CommonStorageStateInterface {
+export interface CommonStoreStateInterface {
   loading: boolean;
   categories: Array<object>;
 }
 
-function state(): CommonStorageStateInterface {
+function state(): CommonStoreStateInterface {
   return {
     loading: false,
     categories: [],

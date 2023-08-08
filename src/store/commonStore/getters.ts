@@ -1,13 +1,13 @@
 import { GetterTree } from 'vuex';
 import { StateInterface } from '../index';
-import { CommonStorageStateInterface } from './state';
+import { CommonStoreStateInterface } from './state';
 
-const getters: GetterTree<CommonStorageStateInterface, StateInterface> = {
+const getters: GetterTree<CommonStoreStateInterface, StateInterface> = {
   getLoading(state) {
     return state.loading;
   },
 
-  getCategories(state) {
+  getListCategories(state) {
     return state.categories;
   },
 };

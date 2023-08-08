@@ -4,16 +4,17 @@
     <q-card class="my-card">
       <q-card-section horizontal>
         <!-- carrega a imagem do card -->
-        <q-img
-          class="col q-ma-sm"
-          :src='imageItem'
-        />
-
+        <div class="" style="width: 200px; height: 200px;">
+          <q-img
+            :src='"public" + imageItem'
+            style="width: 100%; height: 100%;"
+          />
+        </div>
         <!-- exibir botões -->
-        <q-card-actions vertical class="justify-aroun">
-          <q-btn class="btnAmber" icon="add_shopping_cart" @click="addCartItem(idItem)"/>
-          <!-- <q-btn class="btnAmber" icon="favorite_border" @click="addFavoriteItem(idItem)"/> -->
-          <!-- <q-btn class="btnAmber" icon="share" @click="shareItem(idItem)"/> -->
+        <q-card-actions vertical class="justify-around absolute-right" >
+          <q-btn class="btnAmber" icon="add_shopping_cart" @click="$emit('addCartItemEmit', idItem)"/>
+          <q-btn class="btnAmber" icon="favorite_border" @click="$emit('addFavoriteItemEmit', idItem)"/>
+          <q-btn class="btnAmber" icon="share" @click="$emit('shareItemEmit', idItem)"/>
         </q-card-actions>
 
       </q-card-section>
@@ -23,9 +24,8 @@
           <span><b>{{ labelItem }}</b></span><br>
           <span><b>R${{ priceItem }}</b></span>
         </div>
-        <q-space />
         <div class="col col-md-5">
-          <q-btn class="btnAmber" rounded @click="buyItem(idItem)">Comprar</q-btn>
+          <q-btn class="btnAmber" rounded @click="$emit('buyItemEmit', idItem)">Comprar</q-btn>
         </div>
       </q-card-section>
 
@@ -54,7 +54,7 @@ export default defineComponent({
       required: true,
     },
     priceItem: {
-      type: String,
+      type: Number,
       required: true,
     },
     imageItem: {
@@ -68,27 +68,5 @@ export default defineComponent({
     },
   },
 
-  data() {
-    return {};
-  },
-
-  methods: {
-    // Funções para enviar ao elemento 'pai' o sinal de que cada botão foi clicado
-    addCartItem(idItem: number) {
-      this.$emit('addCartItemEmit', idItem);
-    },
-
-    addFavoriteItem(idItem: number) {
-      this.$emit('addFavoriteItemEmit', idItem);
-    },
-
-    shareItem(idItem: number) {
-      this.$emit('shareItemEmit', idItem);
-    },
-
-    buyItem(idItem: number) {
-      this.$emit('buyItemEmit', idItem);
-    },
-  },
 });
 </script>

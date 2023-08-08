@@ -1,17 +1,16 @@
 <template>
-  <q-layout view="hHh Lpr fFf">
+  <q-layout view="hHh LpR fFf">
+    <HeaderComponent />
+    <q-page-container class=""> <!-- Conteúdo principal da página -->
+      <router-view /> <!-- router-view é responsável por chamar a rota da página que será exibida -->
 
-    <div style="margin: 0 auto; max-width: 1920px">
-      <HeaderComponent />
-    </div>
-
-    <!-- Conteúdo principal da página -->
-    <q-page-container>
-      <!-- router-view é responsável por chamar a rota da página que será exibida -->
-      <router-view />
+      <q-page >
+        <q-page-scroller position="bottom-right" :scroll-offset="150" :offset="[20, 120]">
+          <q-btn class="btnAmber z-max" fab icon="keyboard_arrow_up" />
+        </q-page-scroller>
+        <FooterComponent class="absolute-bottom"/>
+      </q-page>
     </q-page-container>
-
-    <FooterComponent />
   </q-layout>
 </template>
 
@@ -29,12 +28,7 @@ export default defineComponent({
   },
 
   setup() {
-    const leftDrawerOpen = ref(false);
-
     return {
-      toggleLeftDrawer() {
-        leftDrawerOpen.value = !leftDrawerOpen.value;
-      },
     };
   },
 });

@@ -24,21 +24,66 @@ const actions: ActionTree<MainStateInterface, StateInterface> = {
   async listProducts({ commit }) {
     try {
       commit('LOADING', true);
-      // const intQtdProducts = 10;
-      // const blnOrderDesc = true;
-      // const response = await HttpClient.get(`/products/sales?intQtdProducts=${intQtdProducts}&blnOrderDesc=${blnOrderDesc}`);
-      const response = await HttpClient.get(`/products/sales%2010?blnOrderDesc=true`);
+      const intQtdProducts = 10;
+      const blnOrderDesc = true;
+      const response = await HttpClient.get(`/products/sales ${intQtdProducts}?blnOrderDesc=${blnOrderDesc}`);
       console.log('Listou os produtos', response.data);
-      commit('LIST_PRODUCTS', response.data);
+
+      setTimeout(() => {
+        commit('LIST_PRODUCTS', response.data);
+      }, 2000);
     } catch (error) {
       console.log('Erro na requisição da lista', error);
     } finally {
       setTimeout(() => {
         commit('LOADING', false);
-      }, 3000);
+      }, 2000);
     }
   },
   ////////////////////////////////////////////////////////
+
+  async listProductsByCategory({ commit }, payload) {
+    try {
+      commit('LOADING', true);
+      const intQtdProducts = 10;
+      const blnOrderDesc = true;
+      const response = await HttpClient.get(`/products/category ${payload}?intQtdProducts=${intQtdProducts}&blnOrderDesc=${blnOrderDesc}`);
+      console.log('Listou os produtos', response.data);
+
+      setTimeout(() => {
+        commit('LIST_PRODUCTS', response.data);
+      }, 2000);
+    } catch (error) {
+      console.log('Erro na requisição da lista', error);
+    } finally {
+      setTimeout(() => {
+        commit('LOADING', false);
+      }, 2000);
+    }
+  },
+  ////////////////////////////////////////////////////////
+
+  async listProductsByName({ commit }, payload) {
+    try {
+      commit('LOADING', true);
+      const intQtdProducts = 10;
+      const blnOrderDesc = true;
+      const response = await HttpClient.get(`/products/find?name=${payload}&intQtdProducts=${intQtdProducts}&blnOrderDesc=${blnOrderDesc}`);
+      console.log('Listou os produtos', response.data);
+
+      setTimeout(() => {
+        commit('LIST_PRODUCTS', response.data);
+      }, 2000);
+    } catch (error) {
+      console.log('Erro na requisição da lista', error);
+    } finally {
+      setTimeout(() => {
+        commit('LOADING', false);
+      }, 2000);
+    }
+  },
+  ////////////////////////////////////////////////////////
+
 
 };
 

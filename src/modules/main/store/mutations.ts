@@ -12,7 +12,7 @@ const mutation: MutationTree<MainStateInterface> = {
 
   LIST_PRODUCTS(state, payload) {
     state.products = [];
-    state.products.push(payload);
+    state.products = payload;
   }
 
 };

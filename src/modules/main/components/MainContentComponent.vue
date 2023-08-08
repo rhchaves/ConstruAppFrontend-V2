@@ -2,104 +2,99 @@
   <q-page class="row justify-center">
     <section class="row justify-center q-mt-xl" style="max-width: 1300px; max-height: 750px">
 
-      <h4>Conteúdo da Página Principal</h4>
-      {{ getListProducts }}
-      <LoadingComponent
-        :visible="getLoading"
+      <h4 v-if="!products">Conteúdo da Página Principal</h4>
+
+      <CardProductComponent
+        v-for="product in products"
+        :key="product.productId"
+        :idItem="product.productId"
+        :labelItem="product.label"
+        :priceItem="product.price"
+        :imageItem="product.imageUri"
+        @addCartItemEmit="addProduct(product)"
+        @addFavoriteItemEmit="addFavoriteProduct(product)"
+        @shareItemEmit="shareProduct(product)"
+        @buyItemEmit="buyProduct(product)"
       />
-      <q-btn class="btnAmber" label="Sair" @click="logout()"></q-btn>
+
+      <LoadingComponent
+        :visible="loading"
+      />
     </section>
   </q-page>
 </template>
 
 <script lang="ts">
-import { defineComponent, ref } from 'vue';
+import { computed, onMounted, defineComponent, ref } from 'vue';
+import { useStore } from '../../../store';
 import { useRouter } from 'vue-router';
-// import CardProductComponent from '../../../common/components/CardProductComponent.vue';
+import CardProductComponent from '../../../common/components/CardProductComponent.vue';
 import LoadingComponent from '../../../common/components/LoadingComponent.vue';
-import { mapActions, mapGetters } from 'vuex';
 
 export default defineComponent({
   name: 'MainContentComponent',
 
   components: {
-    // CardProductComponent,
+    CardProductComponent,
     LoadingComponent,
   },
 
   setup() {
+    // utilização dos serviços
+    const store = useStore();
     const router = useRouter();
+
+    // registrar as propriedades computadas
     const search = ref('');
     const showPage = ref(true);
     const logado = ref(false);
-    const products = ref([]);
+    const loading = computed(() => store.getters['main/getLoading']);
+    const products = computed(() => store.getters['main/getListProducts']);
+
+    // criar as "funções"
+    onMounted(() => {
+      store.dispatch('main/listProducts');
+    });
 
     const logout = () => {
       console.log('Clicou em sair');
       router.push('login')
     };
 
+    const onSubmit = () => {
+      console.log('Clicou em buscar:', search);
+    };
+
+    const addProduct = (product: any) => {
+      console.log('Clicou em addProduct:', product);
+    };
+
+    const addFavoriteProduct = (product: any) => {
+      console.log('Clicou em addFavoriteProduct:', product);
+    };
+
+    const shareProduct = (product: any) => {
+      console.log('Clicou em shareProduct:', product);
+    };
+
+    const buyProduct = (product: any) => {
+      console.log('Clicou em buyProduct:', product);
+    };
+
     return {
       search,
       showPage,
       logado,
+      loading,
       products,
       logout,
+      onSubmit,
+      addProduct,
+      addFavoriteProduct,
+      shareProduct,
+      buyProduct,
     };
   },
 
-  data() {
-    return {
-      // search: '',
-      // logado: false,
-    };
-  },
-
-  created() {
-    this.listarProdutos();
-    this.products = this.getListProducts;
-    },
-
-  computed: {
-    ...mapGetters('main', ['getListProducts', 'getLoading']),
-  },
-
-  methods: {
-    ...mapActions('main', ['listCep', 'listProducts']),
-
-    onSubmit() {
-      console.log('Clicou em buscar:', this.search);
-      this.listCep(this.search);
-    },
-
-    addProduct(itemId: number) {
-      console.log('Clicou em Adicionar:', itemId);
-    },
-
-    addFavoriteProduct(item: any) {
-      console.log('Clicou em Favoritar:', item);
-    },
-
-    shareProduct(item: any) {
-      console.log('Clicou em Compartilhar:', item);
-    },
-
-    buyProduct(item: any) {
-      console.log('Clicou em Comprar:', item);
-    },
-
-    listarProdutosPrincipais() {
-        console.log('listarProdutosPrincipais');
-    },
-
-    listarTodosProdutos() {
-      console.log('listarTodosProdutos');
-    },
-
-    listarProdutos(){
-      this.listProducts();
-    }
-
-  },
 });
 </script>

@@ -1,11 +1,11 @@
 import { Module } from 'vuex';
 import { StateInterface } from '../index';
-import state, { CommonStorageStateInterface } from './state';
+import state, { CommonStoreStateInterface } from './state';
 import actions from './actions';
 import getters from './getters';
 import mutations from './mutations';
 
-const commonStorageModule: Module<CommonStorageStateInterface, StateInterface> = {
+const commonStoreModule: Module<CommonStoreStateInterface, StateInterface> = {
   namespaced: true,
   actions,
   getters,
@@ -13,4 +13,4 @@ const commonStorageModule: Module<CommonStorageStateInterface, StateInterface> =
   state
 };
 
-export default commonStorageModule;
+export default commonStoreModule;

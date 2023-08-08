@@ -1,65 +1,43 @@
 <template>
-  <div class="btnAmber row justify-center" style="height: 53px">
-    <q-btn></q-btn>
-    <!-- <q-btn
+  <div class="btnAmber row justify-center no-wrap" style="height: 53px">
+    <q-btn
       v-for="category in categories"
-      :key="category.id"
+      :key="category.categoryId"
       class="btnAmber categories"
       :label="category.label"
       @click="filterCategories(category)"
-    /> -->
+    />
   </div>
 </template>
 
 <script lang="ts">
-import { defineComponent, ref } from 'vue';
-import { mapActions, mapGetters } from 'vuex';
+import { computed, onMounted, defineComponent } from 'vue';
+import { useStore } from '../../store'
 
 export default defineComponent({
   name: 'CategoriesComponent',
 
   setup() {
-    const categories = ref([]);
+    // utilização dos serviços
+    const store = useStore();
 
-    return {
-      categories,
-    }
-  },
+    // registrar as propriedades computadas
+    const categories = computed(() => store.getters['commonStore/getListCategories']);
 
-  created() {
-    this.listAllCategories();
-    this.categories = this.getListCategories;
-    },
+    // criar as "funções"
+    onMounted(() => {
+      store.dispatch('commonStore/listCategories');
+    })
 
-  computed: {
-    ...mapGetters('commonStorage', ['getListCategories', 'getLoading']),
-  },
-
-  methods: {
-    ...mapActions('commonStorage', ['listCategories']),
-
-    listAllCategories(){
-      this.listCategories();
-    },
-
-    filterCategories() {
-      // this.$emit('categoriesEmit', categories);
-      console.log('Categoria');
-    },
-
-  },
-
-  data() {
-    return {
-      listCategories: [
-        { id: 1, name: 'construcao', label: 'Construção' },
-        { id: 2, name: 'eletrica', label: 'Elétrica' },
-        { id: 3, name: 'hidraulica', label: 'Hidráulica' },
-        { id: 4, name: 'ferragens', label: 'Ferragens' },
-        { id: 5, name: 'tintas', label: 'Tintas' },
-        { id: 6, name: 'ferramentas', label: 'Ferramentas' },
-      ],
+    const filterCategories = (category: any) => {
+      store.dispatch('main/listProductsByCategory', category.categoryId);
     };
+
+    return {
+      store,
+      categories,
+      filterCategories,
+    }
   },
 
 });

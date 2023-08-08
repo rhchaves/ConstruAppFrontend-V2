@@ -2,7 +2,6 @@
   <q-page class="row justify-center">
     <div class="items-center">
       <h4>Conteúdo da Página de Administração</h4>
-      <q-btn class="btnAmber" label="Sair" @click="logout()"></q-btn>
     </div>
   </q-page>
 </template>

@@ -1,7 +1,7 @@
 import { ActionTree } from 'vuex';
 import { StateInterface } from 'src/store/index';
 import { AdministratorStateInterface } from './state';
-import HttpClient from 'src/boot/HttpClient';
+import HttpClient from 'src/common/boot/HttpClient';
 
 const actions: ActionTree<AdministratorStateInterface, StateInterface> = {
 

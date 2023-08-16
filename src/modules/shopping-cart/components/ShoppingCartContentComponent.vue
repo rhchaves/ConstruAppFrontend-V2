@@ -8,21 +8,13 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue';
-import { useRouter } from 'vue-router';
 
 export default defineComponent({
   name: 'ShoppingCartContentComponent',
 
   setup() {
-    const router = useRouter();
-
-    const logout = () => {
-      console.log('Clicou em sair');
-      router.push('login')
-    };
 
     return {
-      logout,
     };
   },
 

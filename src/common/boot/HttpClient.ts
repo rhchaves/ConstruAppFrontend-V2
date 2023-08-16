@@ -1,4 +1,3 @@
-import { ref } from 'vue';
 import axios, { AxiosRequestConfig } from 'axios';
 import { LocalStorage } from 'quasar';
 

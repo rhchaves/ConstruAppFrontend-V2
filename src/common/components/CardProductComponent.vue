@@ -25,7 +25,7 @@
           <span><b>R${{ priceItem }}</b></span>
         </div>
         <div class="col col-md-5">
-          <q-btn class="btnAmber" rounded @click="$emit('buyItemEmit', idItem)">Comprar</q-btn>
+          <q-btn class="btnAmber" label="Comprar" rounded @click="$emit('buyItemEmit', idItem)"/>
         </div>
       </q-card-section>
 

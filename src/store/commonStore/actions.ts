@@ -1,11 +1,11 @@
 import { ActionTree } from 'vuex';
 import { StateInterface } from '../index';
 import { CommonStoreStateInterface } from './state';
-import HttpClient from 'src/boot/HttpClient';
+import HttpClient from 'src/common/boot/HttpClient';
 
 const actions: ActionTree<CommonStoreStateInterface, StateInterface> = {
 
-  async listCategories({ commit }) {
+   async listCategoriesAsync({ commit }) {
     try {
       commit('LOADING', true);
       const response = await HttpClient.get(`/categories/name%2010?blnOrderDesc=false`);

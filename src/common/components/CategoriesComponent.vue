@@ -26,11 +26,11 @@ export default defineComponent({
 
     // criar as "funções"
     onMounted(() => {
-      store.dispatch('commonStore/listCategories');
+      store.dispatch('commonStore/listCategoriesAsync');
     })
 
     const filterCategories = (category: any) => {
-      store.dispatch('main/listProductsByCategory', category.categoryId);
+      store.dispatch('main/listProductsByCategoryAsync', category.categoryId);
     };
 
     return {

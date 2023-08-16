@@ -1,6 +1,5 @@
 <template>
   <q-layout view="hHh LpR fFf">
-    <HeaderComponent />
     <q-page-container class=""> <!-- Conteúdo principal da página -->
       <router-view /> <!-- router-view é responsável por chamar a rota da página que será exibida -->
       <q-page >
@@ -15,14 +14,12 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue';
-import HeaderComponent from '../common/components/HeaderComponent.vue';
 import FooterComponent from '../common/components/FooterComponent.vue';
 
 export default defineComponent({
-  name: 'MainLayout',
+  name: 'LoginLayout',
 
   components: {
-    HeaderComponent,
     FooterComponent,
   },
 

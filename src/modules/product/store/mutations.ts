@@ -6,6 +6,10 @@ const mutation: MutationTree<ProductStateInterface> = {
     state.loading = payload;
   },
 
+  INSERT_PRODUCT_PAGE(state, payload) {
+    state.product = payload;
+  },
+
 };
 
 export default mutation;

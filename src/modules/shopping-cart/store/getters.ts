@@ -7,6 +7,10 @@ const getters: GetterTree<ShoppingCartStateInterface, StateInterface> = {
     return state.loading;
   },
 
+  getCartContents(state) {
+    return state.cart;
+  },
+
 };
 
 export default getters;

@@ -56,7 +56,7 @@
                       <q-item-section>Alterar dados</q-item-section>
                     </q-item>
                     <q-item clickable v-close-popup>
-                      <q-item-section>Sair</q-item-section>
+                      <q-item-section @click="logout()">Sair</q-item-section>
                     </q-item>
                   </q-list>
                 </q-menu>
@@ -80,20 +80,23 @@
           </div>
         </q-toolbar>
       </div>
+
+      <CategoriesComponent v-if="showCategories"/>
     </q-header>
   </div>
 </template>
 
 <script lang="ts">
-import { defineComponent, ref } from 'vue';
+import { defineComponent, ref, computed } from 'vue';
 import { useRouter } from 'vue-router';
 import { useStore } from '../../store'
+import CategoriesComponent from '../../common/components/CategoriesComponent.vue';
 
 export default defineComponent({
   name: 'HeaderComponent',
 
   components: {
-    // CategoriesComponent,
+    CategoriesComponent,
   },
 
   setup() {
@@ -104,47 +107,29 @@ export default defineComponent({
     const search = ref('');
     const quantityCart = ref(0);
     const userTypeEnum = ref ({
-        admin: 1,
-        seller: 2,
-        client: 3,
-      });
+      admin: 1,
+      seller: 2,
+      client: 3,
+    });
 
     const redirectLogo = () => {
-      console.log('Clicou no logo');
-      router.push('login')
-
-      // router.addRoute({})
-      // router.push('/');
-
-      // if (this.getLogado) {
-      //   if (this.getUser.userType === this.userTypeEnum.admin) {
-      //     this.$router.push('administrator');
-      //   }
-
-      //   if (this.getUser.userType === this.userTypeEnum.seller) {
-      //     this.$router.push('seller');
-      //   }
-
-      //   if (this.getUser.userType === this.userTypeEnum.client) {
-      //     if (this.$route.name !== 'main') {
-      // this.$router.push('main');
-      //     }
-      //     this.resetCategoryProduct();
-      //   }
-      // }
-
-      // if (this.getUserAddress.cep > 0) {
-      //   if (this.$route.name !== 'main') {
-      // this.$router.push('main');
-      // }
-      //     this.listAllProducts();
-      //     this.resetCategoryProduct();
-      // }
+      // store.dispatch('main/listProductsAsync');
+      router.push('main')
     };
 
     const searchFilter = (itemSearch: string) => {
-      store.dispatch('main/listProductsByName', itemSearch);
-      console.log('Clicou em filtrar:', itemSearch);
+      store.dispatch('main/listProductsByNameAsync', itemSearch);
+    };
+
+    const currentRoute = computed(() => router.currentRoute.value.name);
+    const showCategories = computed(() => {
+      const allowedRoutes = ['main', 'product'];
+      return currentRoute.value && allowedRoutes.includes(currentRoute.value.toString() || '');
+    });
+
+    const logout = () => {
+      store.dispatch('login/logoutAsync');
+      router.push('login');
     };
 
     return {
@@ -154,7 +139,8 @@ export default defineComponent({
       userTypeEnum,
       redirectLogo,
       searchFilter,
-
+      showCategories,
+      logout,
     };
   },
 

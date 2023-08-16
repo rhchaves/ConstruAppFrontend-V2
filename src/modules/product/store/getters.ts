@@ -7,6 +7,11 @@ const getters: GetterTree<ProductStateInterface, StateInterface> = {
     return state.loading;
   },
 
+  getProductPage(state) {
+    return state.product;
+  },
+
+
 };
 
 export default getters;

@@ -2,11 +2,11 @@ import { ActionTree } from 'vuex';
 import { StateInterface } from 'src/store/index';
 import { MainStateInterface } from './state';
 import axios, { AxiosResponse } from 'axios';
-import HttpClient from 'src/boot/HttpClient';
+import HttpClient from 'src/common/boot/HttpClient';
 
 const actions: ActionTree<MainStateInterface, StateInterface> = {
 
-  async listCep({ commit }, payload) {
+  async listCepAsync({ commit }, payload) {
     try {
       commit('LOADING', true);
       const response: AxiosResponse = await axios.get(`https://viacep.com.br/ws/${payload}/json`);
@@ -21,7 +21,7 @@ const actions: ActionTree<MainStateInterface, StateInterface> = {
   },
   ////////////////////////////////////////////////////////
 
-  async listProducts({ commit }) {
+  async listProductsAsync({ commit }) {
     try {
       commit('LOADING', true);
       const intQtdProducts = 10;
@@ -42,7 +42,7 @@ const actions: ActionTree<MainStateInterface, StateInterface> = {
   },
   ////////////////////////////////////////////////////////
 
-  async listProductsByCategory({ commit }, payload) {
+  async listProductsByCategoryAsync({ commit }, payload) {
     try {
       commit('LOADING', true);
       const intQtdProducts = 10;
@@ -63,7 +63,7 @@ const actions: ActionTree<MainStateInterface, StateInterface> = {
   },
   ////////////////////////////////////////////////////////
 
-  async listProductsByName({ commit }, payload) {
+  async listProductsByNameAsync({ commit }, payload) {
     try {
       commit('LOADING', true);
       const intQtdProducts = 10;

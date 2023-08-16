@@ -6,14 +6,12 @@ const getters: GetterTree<LoginStateInterface, StateInterface> = {
   getLoading(state) {
     return state.loading;
   },
-
   getLogado(state) {
-    return state.logado;
+    return state.loginStatus;
   },
-
-  getUser(state) {
-    return state.user;
-  },
+  getLoginData(state) {
+    return state.loginData;
+  }
 
 };
 

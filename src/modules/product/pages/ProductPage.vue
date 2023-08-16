@@ -1,8 +1,5 @@
 <template>
   <q-page class="row justify-center items-center">
-    <div class="items-center">
-      <h3>Página de Produtos</h3>
-    </div>
     <ProductContentComponent/>
   </q-page>
 </template>

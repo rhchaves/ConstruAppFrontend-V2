@@ -19,13 +19,18 @@
 </template>
 
 <script lang="ts">
-export default {
+import { defineComponent, ref } from 'vue';
+
+export default defineComponent({
   name: 'FooterComponent',
 
-  data() {
+  setup() {
+    const urlLogo = ref('logo-contruApp-v2.png');
+
     return {
-      urlLogo: 'logo-contruApp-v2.png',
+      urlLogo,
     };
   },
-};
+
+});
 </script>

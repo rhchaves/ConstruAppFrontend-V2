@@ -6,7 +6,6 @@ const getters: GetterTree<CommonStoreStateInterface, StateInterface> = {
   getLoading(state) {
     return state.loading;
   },
-
   getListCategories(state) {
     return state.categories;
   },

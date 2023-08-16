@@ -6,6 +6,14 @@ const mutation: MutationTree<ShoppingCartStateInterface> = {
     state.loading = payload;
   },
 
+  ADD_TO_CART(state, payload) {
+    state.cart.push(payload);
+  },
+
+  EMPTY_CART(state) {
+    state.cart = [];
+  },
+
 };
 
 export default mutation;

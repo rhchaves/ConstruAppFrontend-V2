@@ -7,14 +7,14 @@ import {
   useStore as vuexUseStore,
 } from 'vuex'
 
-import administratorModule from 'src/modules/administrator/store';
+import administratorModule from '../modules/administrator/store';
 import commonStoreModule from './commonStore';
-import clientModule from 'src/modules/client/store';
-import loginModule from 'src/modules/login/store';
-import mainModule from 'src/modules/main/store';
-import productModule from 'src/modules/product/store';
-import sellerModule from 'src/modules/seller/store';
-import shoppingCartModule from 'src/modules/shopping-cart/store';
+import clientModule from '../modules/client/store';
+import loginModule from '../common/login/store';
+import mainModule from '../modules/main/store';
+import productModule from '../modules/product/store';
+import sellerModule from '../modules/seller/store';
+import shoppingCartModule from '../modules/shopping-cart/store';
 // import { ExampleStateInterface } from './module-example/state';
 
 export interface StateInterface {

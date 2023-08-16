@@ -1,29 +1,28 @@
 <template>
   <q-page>
-    <CategoriesComponent />
-    <MainContentComponent />
+    <MainContentComponent v-if="showPage"/>
   </q-page>
 </template>
 
 <script lang="ts">
-import { defineComponent, ref } from 'vue';
+import { defineComponent, computed } from 'vue';
+import { useStore } from '../../../store';
 import MainContentComponent from '../components/MainContentComponent.vue';
-import CategoriesComponent from '../../../common/components/CategoriesComponent.vue';
 
 export default defineComponent({
   name: 'MainPage',
 
   components: {
     MainContentComponent,
-    CategoriesComponent,
   },
 
   setup() {
-    const search = ref('');
-    const showPage = ref(true);
+    const store = useStore();
+
+    // const showPage = computed(() => store.getters['login/getLogado']);
+    const showPage = true;
 
     return {
-      search,
       showPage,
     };
   },

@@ -46,26 +46,21 @@ export default defineComponent({
 
     // registrar as propriedades computadas
     const search = ref('');
-    const showPage = ref(true);
-    const logado = ref(false);
     const loading = computed(() => store.getters['main/getLoading']);
     const products = computed(() => store.getters['main/getListProducts']);
 
     // criar as "funções"
     onMounted(() => {
-      store.dispatch('main/listProducts');
+      store.dispatch('main/listProductsAsync');
+      console.log('Criou a página e carregou products:', products);
     });
 
     const logout = () => {
-      console.log('Clicou em sair');
       router.push('login')
     };
 
-    const onSubmit = () => {
-      console.log('Clicou em buscar:', search);
-    };
-
     const addProduct = (product: any) => {
+      store.dispatch('shoppingCart/addToCartAsync', product);
       console.log('Clicou em addProduct:', product);
     };
 
@@ -78,17 +73,16 @@ export default defineComponent({
     };
 
     const buyProduct = (product: any) => {
+      store.dispatch('product/insertProductPage', product);
+      router.push('product');
       console.log('Clicou em buyProduct:', product);
     };
 
     return {
       search,
-      showPage,
-      logado,
       loading,
       products,
       logout,
-      onSubmit,
       addProduct,
       addFavoriteProduct,
       shareProduct,

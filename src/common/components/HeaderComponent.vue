@@ -113,7 +113,7 @@ export default defineComponent({
     });
 
     const redirectLogo = () => {
-      // store.dispatch('main/listProductsAsync');
+      store.dispatch('main/clearListProducts');
       router.push('main')
     };
 

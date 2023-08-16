@@ -30,6 +30,7 @@ export default defineComponent({
     })
 
     const filterCategories = (category: any) => {
+      store.dispatch('main/clearListProducts');
       store.dispatch('main/listProductsByCategoryAsync', category.categoryId);
     };
 

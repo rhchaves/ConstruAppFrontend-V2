@@ -15,8 +15,16 @@ const getters: GetterTree<MainStateInterface, StateInterface> = {
     return state.cep;
   },
 
-  getListProducts(state) {
-    return state.products;
+  getListAllProducts(state) {
+    return state.allProducts;
+  },
+
+  getListProductsByCategory(state) {
+    return state.productsByCategory;
+  },
+
+  getListProductsByName(state) {
+    return state.productsByName;
   },
 
 };

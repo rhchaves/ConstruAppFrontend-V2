@@ -25,7 +25,7 @@
 </template>
 
 <script lang="ts">
-import { computed, onMounted, defineComponent, ref } from 'vue';
+import { computed, onMounted, defineComponent, ref, watch } from 'vue';
 import { useStore } from '../../../store';
 import { useRouter } from 'vue-router';
 import CardProductComponent from '../../../common/components/CardProductComponent.vue';
@@ -45,14 +45,33 @@ export default defineComponent({
     const router = useRouter();
 
     // registrar as propriedades computadas
-    const search = ref('');
     const loading = computed(() => store.getters['main/getLoading']);
-    const products = computed(() => store.getters['main/getListProducts']);
+    const allProducts = computed(() => store.getters['main/getListAllProducts']);
+    const productsByCategory = computed(() => store.getters['main/getListProductsByCategory']);
+    const productsByName = computed(() => store.getters['main/getListProductsByName']);
+
+    let products = ref();
+
 
     // criar as "funções"
     onMounted(() => {
       store.dispatch('main/listProductsAsync');
       console.log('Criou a página e carregou products:', products);
+    });
+
+    watch([allProducts, productsByCategory, productsByName], () => {
+
+      if (productsByName.value.length > 0) {
+        console.log('productsByName', productsByName.value);
+        products.value = productsByName.value;
+      } else if (productsByCategory.value.length > 0) {
+        console.log('productsByCategory', productsByCategory.value);
+        products.value = productsByCategory.value;
+      } else {
+        console.log('allProducts', allProducts.value);
+        products.value = allProducts.value;
+      }
+      console.log('products.value', products.value);
     });
 
     const logout = () => {
@@ -79,7 +98,6 @@ export default defineComponent({
     };
 
     return {
-      search,
       loading,
       products,
       logout,

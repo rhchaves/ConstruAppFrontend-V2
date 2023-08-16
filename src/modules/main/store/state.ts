@@ -2,7 +2,9 @@ export interface MainStateInterface {
   loading: boolean;
   logado: boolean;
   cep: Array<string>;
-  products: Array<object>;
+  allProducts: Array<object>;
+  productsByCategory: Array<object>;
+  productsByName: Array<object>;
 }
 
 function state(): MainStateInterface {
@@ -10,7 +12,9 @@ function state(): MainStateInterface {
     loading: false,
     logado: false,
     cep: [],
-    products: [],
+    allProducts: [],
+    productsByCategory: [],
+    productsByName: [],
   };
 }
 

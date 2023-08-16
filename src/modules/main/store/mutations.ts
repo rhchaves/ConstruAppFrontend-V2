@@ -10,9 +10,24 @@ const mutation: MutationTree<MainStateInterface> = {
     state.cep.push(payload);
   },
 
-  LIST_PRODUCTS(state, payload) {
-    state.products = [];
-    state.products = payload;
+  LIST_ALL_PRODUCTS(state, payload) {
+    state.allProducts = [];
+    state.allProducts = payload;
+  },
+
+  LIST_PRODUCTS_BY_CATEGORY(state, payload) {
+    state.productsByCategory = [];
+    state.productsByCategory = payload;
+  },
+
+  LIST_PRODUCTS_BY_NAME(state, payload) {
+    state.productsByName = [];
+    state.productsByName = payload;
+  },
+
+  CLEAR_LIST_PRODUCTS(state) {
+    state.productsByCategory = [];
+    state.productsByName = [];
   }
 
 };

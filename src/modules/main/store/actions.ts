@@ -30,7 +30,7 @@ const actions: ActionTree<MainStateInterface, StateInterface> = {
       console.log('Listou os produtos', response.data);
 
       setTimeout(() => {
-        commit('LIST_PRODUCTS', response.data);
+        commit('LIST_ALL_PRODUCTS', response.data);
       }, 2000);
     } catch (error) {
       console.log('Erro na requisição da lista', error);
@@ -51,7 +51,7 @@ const actions: ActionTree<MainStateInterface, StateInterface> = {
       console.log('Listou os produtos', response.data);
 
       setTimeout(() => {
-        commit('LIST_PRODUCTS', response.data);
+        commit('LIST_PRODUCTS_BY_CATEGORY', response.data);
       }, 2000);
     } catch (error) {
       console.log('Erro na requisição da lista', error);
@@ -72,7 +72,7 @@ const actions: ActionTree<MainStateInterface, StateInterface> = {
       console.log('Listou os produtos', response.data);
 
       setTimeout(() => {
-        commit('LIST_PRODUCTS', response.data);
+        commit('LIST_PRODUCTS_BY_NAME', response.data);
       }, 2000);
     } catch (error) {
       console.log('Erro na requisição da lista', error);
@@ -84,6 +84,10 @@ const actions: ActionTree<MainStateInterface, StateInterface> = {
   },
   ////////////////////////////////////////////////////////
 
+  clearListProducts({ commit }) {
+      commit('CLEAR_LIST_PRODUCTS');
+  },
+  ////////////////////////////////////////////////////////
 
 };
 

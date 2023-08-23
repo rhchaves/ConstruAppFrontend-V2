@@ -1,9 +1,10 @@
 <template>
-  <div class="btnAmber row justify-center no-wrap" style="height: 53px">
+  <div class="btnAmber row justify-center no-wrap" >
     <q-btn
       v-for="category in categories"
       :key="category.categoryId"
-      class="btnAmber categories"
+      class="categories q-ma-sm"
+      push
       :label="category.label"
       @click="filterCategories(category)"
     />
@@ -30,8 +31,8 @@ export default defineComponent({
     })
 
     const filterCategories = (category: any) => {
-      store.dispatch('main/clearListProducts');
-      store.dispatch('main/listProductsByCategoryAsync', category.categoryId);
+      store.dispatch('product/clearListProducts');
+      store.dispatch('product/listProductsByCategoryAsync', category.categoryId);
     };
 
     return {

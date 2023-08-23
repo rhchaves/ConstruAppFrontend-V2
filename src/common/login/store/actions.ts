@@ -27,6 +27,7 @@ const actions: ActionTree<LoginStateInterface, StateInterface> = {
 
       commit('UPDATE_LOGIN_STATE', loginData.data.authenticated);
       commit('SET_LOGIN_DATA', decodedToken);
+      return decodedToken;
     } catch (error) {
       await this.dispatch('logoutAsync', this.getters.getLoginData);
       console.log('entrou no catch')

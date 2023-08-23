@@ -73,37 +73,29 @@ export default defineComponent({
     });
     const isPwd = ref(true);
     const userTypeEnum = {
-      admin: 1,
-      client: 2,
-      seller: 3,
+      simple_client: 1,
+      premium_client: 2,
+      master_client: 3,
+      simple_seller: 4,
+      premium_seller: 5,
+      master_seller: 6,
+      simple_admin: 7,
+      general_admin: 8,
+      product_admin: 9,
+      seller_admin: 10,
+      client_admin: 11,
+      master_admin: 12,
     };
 
     const loginAccountAsync = async () => {
       const resp = await store.dispatch('login/loginAccountAsync', user.value);
-
-      console.log('Ação após login', resp);
-
-      router.push('/main');
-
-      // if (item === userTypeEnum.admin) {
-      //   console.log('Entrou administrator :', item);
-      //   router.push('/administrator');
-      // } else if (item === userTypeEnum.client) {
-      //   console.log('Entrou cliente :', item);
-      //   router.push('/client');
-      // } else if (item === userTypeEnum.seller) {
-      //   console.log('Entrou vendedor :', item);
-      //   router.push('/seller');
-      // } else if (item === userTypeEnum.product) {
-      //   console.log('Entrou produto :', item);
-      //   router.push('/product');
-      // } else if (item === userTypeEnum.shoppingCart) {
-      //   console.log('Entrou carrinho :', item);
-      //   router.push('/shopping-cart');
-      // } else if (item === userTypeEnum.main) {
-      //   console.log('Entrou principal :', item);
-      //   router.push('/main');
-      // }
+      if (resp.type_user === 'simple_client') {
+        router.push('/cliente/produtos');
+      } else if (resp.type_user === 'simple_seller') {
+        router.push('/vendedor');
+      } else if (resp.type_user === 'master_admin') {
+        router.push('/administrador');
+      }
     };
 
     return {

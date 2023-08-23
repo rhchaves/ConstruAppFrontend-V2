@@ -65,7 +65,7 @@
             </div>
 
             <!-- Carrinho -->
-            <q-btn class="q-mr-lg" flat icon="shopping_cart" to="shopping-cart">
+            <q-btn class="q-mr-lg" flat icon="shopping_cart" to="carrinho">
               <q-badge
                 rounded
                 class="q-mr-sm q-mt-xs"
@@ -81,13 +81,13 @@
         </q-toolbar>
       </div>
 
-      <CategoriesComponent v-if="showCategories"/>
+      <CategoriesComponent/>
     </q-header>
   </div>
 </template>
 
 <script lang="ts">
-import { defineComponent, ref, computed } from 'vue';
+import { defineComponent, ref } from 'vue';
 import { useRouter } from 'vue-router';
 import { useStore } from '../../store'
 import CategoriesComponent from '../../common/components/CategoriesComponent.vue';
@@ -106,40 +106,27 @@ export default defineComponent({
     const urlLogo = ref('logo-contruApp-v2.png');
     const search = ref('');
     const quantityCart = ref(0);
-    const userTypeEnum = ref ({
-      admin: 1,
-      seller: 2,
-      client: 3,
-    });
 
     const redirectLogo = () => {
-      store.dispatch('main/clearListProducts');
-      router.push('main')
+      store.dispatch('product/clearListProducts');
+      router.push('produtos')
     };
 
     const searchFilter = (itemSearch: string) => {
-      store.dispatch('main/listProductsByNameAsync', itemSearch);
+      store.dispatch('product/listProductsByNameAsync', itemSearch);
     };
-
-    const currentRoute = computed(() => router.currentRoute.value.name);
-    const showCategories = computed(() => {
-      const allowedRoutes = ['main', 'product'];
-      return currentRoute.value && allowedRoutes.includes(currentRoute.value.toString() || '');
-    });
 
     const logout = () => {
       store.dispatch('login/logoutAsync');
-      router.push('login');
+      router.push('/login');
     };
 
     return {
       urlLogo,
       search,
       quantityCart,
-      userTypeEnum,
       redirectLogo,
       searchFilter,
-      showCategories,
       logout,
     };
   },

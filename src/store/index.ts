@@ -7,22 +7,20 @@ import {
   useStore as vuexUseStore,
 } from 'vuex'
 
+import accountModule from '../modules/client/account/store';
 import administratorModule from '../modules/administrator/store';
 import commonStoreModule from './commonStore';
-import clientModule from '../modules/client/store';
 import loginModule from '../common/login/store';
-import mainModule from '../modules/main/store';
-import productModule from '../modules/product/store';
+import productModule from '../modules/client/product/store';
 import sellerModule from '../modules/seller/store';
-import shoppingCartModule from '../modules/shopping-cart/store';
+import shoppingCartModule from '../modules/client/shopping-cart/store';
 // import { ExampleStateInterface } from './module-example/state';
 
 export interface StateInterface {
+  account: typeof accountModule;
   administrator: typeof administratorModule;
-  client: typeof clientModule;
   commonStore: typeof commonStoreModule;
   login: typeof loginModule;
-  main: typeof mainModule;
   product: typeof productModule;
   seller: typeof sellerModule;
   shoppingCart: typeof shoppingCartModule;
@@ -48,11 +46,10 @@ export const storeKey: InjectionKey<VuexStore<StateInterface>> = Symbol('vuex-ke
 export default store(function (/* { ssrContext } */) {
   const Store = createStore<StateInterface>({
     modules: {
+      account: accountModule,
       administrator: administratorModule,
-      client: clientModule,
       commonStore: commonStoreModule,
       login: loginModule,
-      main: mainModule,
       product: productModule,
       seller: sellerModule,
       shoppingCart: shoppingCartModule,

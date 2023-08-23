@@ -2,8 +2,8 @@ import AdministratorPage from './pages/AdministratorPage.vue';
 
 const routes = [
   {
-    path: 'administrator',
-    name: 'administrator',
+    path: 'administrador',
+    name: 'administrador',
     component: AdministratorPage,
   },
 ];

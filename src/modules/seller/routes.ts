@@ -2,8 +2,8 @@ import SellerPage from './pages/SellerPage.vue';
 
 const routes = [
   {
-    path: 'seller',
-    name: 'seller',
+    path: 'vendedor',
+    name: 'vendedor',
     component: SellerPage,
   },
 ];

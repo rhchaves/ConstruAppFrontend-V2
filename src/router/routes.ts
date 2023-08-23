@@ -1,12 +1,11 @@
-import { RouteRecordRaw, NavigationGuardNext  } from 'vue-router';
+import { RouteRecordRaw, NavigationGuardNext } from 'vue-router';
 import { isAuthenticated } from '../common/boot/auth';
+import AccountRoute from '../modules/client/account/routes';
 import AdministratorRoute from '../modules/administrator/routes';
-import ClientRoute from '../modules/client/routes';
 import LoginRoute from '../common/login/routes';
-import MainRoute from '../modules/main/routes';
-import ProductRoute from '../modules/product/routes';
+import ProductRoute from '../modules/client/product/routes';
 import SellerRoute from '../modules/seller/routes';
-import ShoppingCartRoute from '../modules/shopping-cart/routes';
+import ShoppingCartRoute from '../modules/client/shopping-cart/routes';
 
 function accessGuard(allowedTypes: string[]): (to: any, from: any, next: NavigationGuardNext) => void {
   return (to, from, next) => {
@@ -19,7 +18,7 @@ function accessGuard(allowedTypes: string[]): (to: any, from: any, next: Navigat
         next();
       } else {
         next({
-          path: '/access-denied',
+          path: '/acesso-negado',
           query: { redirect: to.fullPath },
         });
       }
@@ -43,22 +42,21 @@ const routes: RouteRecordRaw[] = [
     ],
   },
   {
-    name: 'main',
+    name: 'cliente',
     path: '/',
-    redirect: '/main',
+    redirect: '/cliente',
     component: () => import('layouts/MainLayout.vue'),
     children: [
-      ...ClientRoute,
-      ...MainRoute,
+      ...AccountRoute,
       ...ProductRoute,
       ...ShoppingCartRoute,
     ],
     beforeEnter: accessGuard(['simple_client']),
   },
   {
-    name: 'administrator',
+    name: 'administrador',
     path: '/',
-    redirect: '/administrator',
+    redirect: '/administrador',
     component: () => import('layouts/AdminLayout.vue'),
     children: [
       ...AdministratorRoute,
@@ -67,8 +65,8 @@ const routes: RouteRecordRaw[] = [
   },
   {
     path: '/',
-    name: 'seller',
-    redirect: '/seller',
+    name: 'vendedor',
+    redirect: '/vendedor',
     component: () => import('layouts/AdminLayout.vue'),
     children: [
       ...SellerRoute,
@@ -77,14 +75,14 @@ const routes: RouteRecordRaw[] = [
   },
 
   {
-    path: '/access-denied',
-    name: 'access-denied',
+    path: '/acesso-negado',
+    name: 'acesso-negado',
     component: () => import('layouts/AccessDenied.vue'),
   },
 
   {
     path: '/:catchAll(.*)*',
-    name: 'page-not-found',
+    name: 'pagina-nao-encontrada',
     component: () => import('layouts/PageErrorNotFound.vue'),
   },
 ];

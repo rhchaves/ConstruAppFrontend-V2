@@ -1,11 +1,16 @@
 <template>
-  <q-page class="row justify-center items-center">
-    <PoductsListComponent :products="products" v-if="isProductDetailEmpty"/>
-    <ProductDetailsComponent v-else/>
+  <q-page class="flex flex-center">
+    <!-- div provisória para ajustar o tamanho da tela -->
+    <div class="" style="max-width: 1200px;">
 
-    <LoadingComponent
+      <CategoriesComponent/>
+      <PoductsListComponent :products="products" v-if="isProductDetailEmpty"/>
+      <ProductDetailsComponent v-else/>
+
+      <LoadingComponent
       :visible="loading"
-    />
+      />
+    </div>
   </q-page>
 </template>
 
@@ -13,6 +18,7 @@
 import { defineComponent, onMounted, computed, watch, ref } from 'vue';
 import { useStore } from '../../../../store';
 import { useRouter } from 'vue-router';
+import CategoriesComponent from '../../../../common/components/CategoriesComponent.vue';
 import PoductsListComponent from '../components/PoductsListComponent.vue';
 import ProductDetailsComponent from '../components/ProductDetailsComponent.vue';
 import LoadingComponent from '../../../../common/components/LoadingComponent.vue';
@@ -21,6 +27,7 @@ export default defineComponent({
   name: 'ProductPage',
 
   components: {
+    CategoriesComponent,
     PoductsListComponent,
     ProductDetailsComponent,
     LoadingComponent,
@@ -37,6 +44,10 @@ export default defineComponent({
     const productsByCategory = computed(() => store.getters['product/getListProductsByCategory']);
     const productsByName = computed(() => store.getters['product/getListProductsByName']);
     const productDetail = computed(() => store.getters['product/getProductDetail']);
+
+
+    //Logado? exibir dados no header
+
 
     // Verifica se o productDetail está vazio
     const isProductDetailEmpty = computed(() => Object.keys(productDetail.value).length === 0);

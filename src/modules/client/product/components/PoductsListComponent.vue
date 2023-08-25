@@ -1,17 +1,17 @@
 <template>
-  <q-page class="row justify-center">
-    <section class="row justify-center q-mt-xl" style="max-width: 1300px; max-height: 750px">
+  <q-page class="">
+    <section class="row justify-center" >
       <CardProductComponent
-        v-for="product in products"
-        :key="product.productId"
-        :idItem="product.productId"
-        :labelItem="product.label"
-        :priceItem="product.price"
-        :imageItem="product.imageUri"
-        @addCartItemEmit="addProduct(product)"
-        @addFavoriteItemEmit="addFavoriteProduct(product)"
-        @shareItemEmit="shareProduct(product)"
-        @buyItemEmit="buyProduct(product)"
+      v-for="product in products"
+      :key="product.productId"
+      :idItem="product.productId"
+      :labelItem="product.label"
+      :priceItem="product.price"
+      :imageItem="product.imageUri"
+      @addCartItemEmit="addProduct(product)"
+      @addFavoriteItemEmit="addFavoriteProduct(product)"
+      @shareItemEmit="shareProduct(product)"
+      @buyItemEmit="buyProduct(product)"
       />
     </section>
   </q-page>
@@ -66,6 +66,7 @@ export default defineComponent({
       buyProduct,
     };
   },
+
 
 });
 </script>

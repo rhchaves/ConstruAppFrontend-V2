@@ -9,7 +9,7 @@ const actions: ActionTree<ProductStateInterface, StateInterface> = {
   async listProductsAsync({ commit }) {
     try {
       commit('LOADING', true);
-      const intQtdProducts = 10;
+      const intQtdProducts = 25;
       const blnOrderDesc = true;
       const response = await HttpClient.get(`/products/sales ${intQtdProducts}?blnOrderDesc=${blnOrderDesc}`);
       // setTimeout(() => {

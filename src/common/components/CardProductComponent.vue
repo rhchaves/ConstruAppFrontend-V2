@@ -1,10 +1,10 @@
 <template>
-  <div class="q-ma-md">
+  <div class="q-ma-md my-card">
     <!-- card  -->
     <q-card class="my-card">
       <q-card-section horizontal>
         <!-- carrega a imagem do card -->
-        <div class="" style="width: 200px; height: 200px;">
+        <div class="" style="width: 120px; height: 120px;">
           <q-img
             :src='"public" + imageItem'
             style="width: 100%; height: 100%;"
@@ -12,9 +12,9 @@
         </div>
         <!-- exibir botões -->
         <q-card-actions vertical class="justify-around absolute-right" >
-          <q-btn class="btnAmber" icon="add_shopping_cart" @click="$emit('addCartItemEmit', idItem)"/>
-          <q-btn class="btnAmber" icon="favorite_border" @click="$emit('addFavoriteItemEmit', idItem)"/>
-          <q-btn class="btnAmber" icon="share" @click="$emit('shareItemEmit', idItem)"/>
+          <q-btn class="btnAmber" icon="add_shopping_cart" size="sm" @click="$emit('addCartItemEmit', idItem)"/>
+          <q-btn class="btnAmber" icon="favorite_border" size="sm" @click="$emit('addFavoriteItemEmit', idItem)"/>
+          <q-btn class="btnAmber" icon="share" size="sm" @click="$emit('shareItemEmit', idItem)"/>
         </q-card-actions>
 
       </q-card-section>
@@ -25,7 +25,7 @@
           <span><b>R${{ priceItem }}</b></span>
         </div>
         <div class="col col-md-5">
-          <q-btn class="btnAmber" label="Comprar" rounded @click="$emit('buyItemEmit', idItem)"/>
+          <q-btn class="btnAmber" label="Comprar" rounded size="sm" @click="$emit('buyItemEmit', idItem)"/>
         </div>
       </q-card-section>
 

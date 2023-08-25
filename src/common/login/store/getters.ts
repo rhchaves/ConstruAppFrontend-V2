@@ -11,7 +11,8 @@ const getters: GetterTree<LoginStateInterface, StateInterface> = {
   },
   getLoginData(state) {
     return state.loginData;
-  }
+  },
+
 
 };
 

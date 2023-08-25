@@ -33,7 +33,6 @@ export default defineComponent({
     const router = useRouter();
 
     const redirectToLastPage = () => {
-      console.log('Clicou em voltar', router.back())
       router.back();
     }
     return {

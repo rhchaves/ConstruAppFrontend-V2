@@ -12,7 +12,7 @@ function accessGuard(allowedTypes: string[]): (to: any, from: any, next: Navigat
     const user = isAuthenticated();
     if (user) {
       const userObject = JSON.parse(user);
-      const userType = userObject?.user?.type_user || '';
+      const userType = userObject?.type_user || '';
 
       if (allowedTypes.includes(userType)) {
         next();

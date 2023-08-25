@@ -2,6 +2,7 @@ export interface LoginStateInterface {
   loading: boolean;
   loginStatus: boolean;
   loginData: object;
+
 }
 
 function state(): LoginStateInterface {
@@ -9,6 +10,7 @@ function state(): LoginStateInterface {
     loading: false,
     loginStatus: false,
     loginData: {},
+
   }
 }
 

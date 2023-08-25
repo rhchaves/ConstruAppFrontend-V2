@@ -12,6 +12,7 @@ const mutation: MutationTree<LoginStateInterface> = {
     state.loginData = payload;
   },
 
+
 };
 
 export default mutation;

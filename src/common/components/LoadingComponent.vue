@@ -1,13 +1,11 @@
 <template>
   <div>
-    <div class="q-gutter-md row">
-      <q-inner-loading
-        :showing="visible"
-        label="Aguarde por favor..."
-        label-class="text-teal"
-        label-style="font-size: 1.1em"
-      />
-    </div>
+    <q-inner-loading
+      :showing="visible"
+      label="Aguarde por favor..."
+      label-class="text-teal"
+      label-style="font-size: 1.1em"
+    />
   </div>
 </template>
 

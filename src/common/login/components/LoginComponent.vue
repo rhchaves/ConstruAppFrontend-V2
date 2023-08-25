@@ -10,7 +10,7 @@
         <h6 class="text-center">SUA CONTA PARA TUDO DA CONSTRUAPP</h6>
 
         <q-input
-          v-model="user.email"
+          v-model="inputUser.email"
           class=""
           label="Email"
           type="email"
@@ -23,7 +23,7 @@
         <!-- melhorar a veirificação do e-mail -->
 
         <q-input
-          v-model="user.password"
+          v-model="inputUser.password"
           class=""
           label="Senha"
           :type="isPwd ? 'password' : 'text'"
@@ -42,7 +42,7 @@
         </q-input>
 
         <div class="column items-center bg-red">
-          <q-btn class="btnAmber" label="Login" type="submit" :disable=!user.password||!user.email rounded/>
+          <q-btn class="btnAmber" label="Login" type="submit" :disable=!inputUser.password||!inputUser.email rounded/>
           <q-btn class="" label="Esqueci a senha" flat @click="$emit('forgotPasswordEmit')"/>
           <q-btn class="" label="Criar Conta" flat @click="$emit('registerClientEmit')"/>
           <div>
@@ -59,6 +59,7 @@
 import { defineComponent, ref } from 'vue';
 import { useStore } from '../../../store';
 import { useRouter } from 'vue-router';
+import { userType } from '../../interfaces/UserPerfil';
 
 export default defineComponent({
   name: 'LoginComponent',
@@ -67,41 +68,29 @@ export default defineComponent({
     const store = useStore();
     const router = useRouter();
 
-    const user = ref({
+    const inputUser = ref({
       email: '',
       password: '',
     });
     const isPwd = ref(true);
-    const userTypeEnum = {
-      simple_client: 1,
-      premium_client: 2,
-      master_client: 3,
-      simple_seller: 4,
-      premium_seller: 5,
-      master_seller: 6,
-      simple_admin: 7,
-      general_admin: 8,
-      product_admin: 9,
-      seller_admin: 10,
-      client_admin: 11,
-      master_admin: 12,
-    };
 
     const loginAccountAsync = async () => {
-      const resp = await store.dispatch('login/loginAccountAsync', user.value);
-      if (resp.type_user === 'simple_client') {
+      const resp = await store.dispatch('login/loginAccountAsync', inputUser.value);
+      const user = resp.type_user.toUpperCase();
+
+      if (user === userType.SIMPLE_CLIENT || user === userType.PREMIUM_CLIENT || user === userType.MASTER_CLIENT) {
         router.push('/cliente/produtos');
-      } else if (resp.type_user === 'simple_seller') {
+      } else if (user === userType.SIMPLE_SELLER || user === userType.PREMIUM_SELLER || user === userType.MASTER_SELLER) {
         router.push('/vendedor');
-      } else if (resp.type_user === 'master_admin') {
+      } else if (user === userType.SIMPLE_ADMIN || user === userType.CLIENT_ADMIN || user === userType.SELLER_ADMIN ||
+                user === userType.PRODUCT_ADMIN || user === userType.GENERAL_ADMIN || user === userType.MASTER_ADMIN) {
         router.push('/administrador');
       }
     };
 
     return {
-      user,
+      inputUser,
       isPwd,
-      userTypeEnum,
       loginAccountAsync,
     };
   },

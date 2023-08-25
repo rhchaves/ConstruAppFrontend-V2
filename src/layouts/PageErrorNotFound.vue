@@ -14,9 +14,9 @@
         color="white"
         text-color="blue"
         unelevated
-        to="/"
-        label="Voltar a Home"
+        label="Voltar"
         no-caps
+        @click="redirectToLastPage()"
       />
     </div>
   </q-layout>
@@ -24,8 +24,21 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue';
+import { useRouter } from 'vue-router';
 
 export default defineComponent({
   name: 'PageErrorNotFound',
+
+  setup() {
+    const router = useRouter();
+
+    const redirectToLastPage = (() => {
+      router.back();
+    })
+    return{
+      redirectToLastPage,
+    };
+  },
+
 });
 </script>

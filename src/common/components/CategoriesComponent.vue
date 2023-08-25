@@ -1,9 +1,9 @@
 <template>
-  <div class="btnAmber row justify-center no-wrap" >
+  <div class="row justify-around q-mt-sm" >
     <q-btn
       v-for="category in categories"
       :key="category.categoryId"
-      class="categories q-ma-sm"
+      class="btnAmber categories q-ma-sm"
       push
       :label="category.label"
       @click="filterCategories(category)"

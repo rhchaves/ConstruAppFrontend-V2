@@ -38,12 +38,12 @@
 
           <!-- Icones lateral direita -->
           <div class="row items-center no-wrap absolute-right">
-            <div class="btnAmber rounded-item row items-center no-wrap">
+            <div class="btnAmber rounded-item row items-center no-wra">
               <!-- Conta do usuário -->
                 <q-avatar class="q-ml-sm q-mr-sm" size="26px">
                   <img src="https://cdn.quasar.dev/img/boy-avatar.png" />
                 </q-avatar>
-              <q-btn flat to="/login">Entrar</q-btn>
+              <q-btn flat :label="user.UserName" to="/login"></q-btn>
 
               <!-- Menu retrátil (icone de 3 riscos) -->
               <q-btn flat icon="menu">
@@ -80,23 +80,19 @@
           </div>
         </q-toolbar>
       </div>
-
-      <CategoriesComponent/>
     </q-header>
   </div>
 </template>
 
 <script lang="ts">
-import { defineComponent, ref } from 'vue';
+import { computed, defineComponent, ref, onMounted } from 'vue';
 import { useRouter } from 'vue-router';
 import { useStore } from '../../store'
-import CategoriesComponent from '../../common/components/CategoriesComponent.vue';
 
 export default defineComponent({
   name: 'HeaderComponent',
 
   components: {
-    CategoriesComponent,
   },
 
   setup() {
@@ -106,6 +102,7 @@ export default defineComponent({
     const urlLogo = ref('logo-contruApp-v2.png');
     const search = ref('');
     const quantityCart = ref(0);
+    const user = computed(() => store.getters['login/getLoginData']);
 
     const redirectLogo = () => {
       store.dispatch('product/clearListProducts');
@@ -121,10 +118,17 @@ export default defineComponent({
       router.push('/login');
     };
 
+    onMounted(() => {
+      store.dispatch('login/userIsLogged');
+    });
+
+
+
     return {
       urlLogo,
       search,
       quantityCart,
+      user,
       redirectLogo,
       searchFilter,
       logout,
